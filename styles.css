@@ -9,7 +9,7 @@
   --accent: #b7481b;
   --accent-soft: #e8b677;
   --accent-deep: #7f2c12;
-  --shadow: 0 20px 60px rgba(81, 44, 13, 0.16);
+  --shadow: 0 10px 24px rgba(81, 44, 13, 0.1);
   --radius-xl: 28px;
   --radius-lg: 20px;
   --radius-md: 16px;
@@ -32,18 +32,6 @@ body {
     radial-gradient(circle at top left, rgba(255, 245, 224, 0.92), transparent 30%),
     radial-gradient(circle at top right, rgba(183, 72, 27, 0.15), transparent 26%),
     linear-gradient(135deg, var(--bg) 0%, #e7d4b6 42%, var(--bg-deep) 100%);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 24px 24px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 90%);
 }
 
 .shell {
@@ -99,9 +87,9 @@ body::before {
 .panel {
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
-  background: var(--panel);
-  backdrop-filter: blur(18px);
+  background: rgba(253, 248, 240, 0.94);
   box-shadow: var(--shadow);
+  contain: layout paint;
 }
 
 .control-panel,
@@ -167,12 +155,12 @@ button {
   color: var(--ink);
   background: rgba(255, 255, 255, 0.82);
   cursor: pointer;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  transition: background-color 140ms ease, transform 140ms ease;
 }
 
 button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(73, 42, 17, 0.16);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .accent-btn {
@@ -231,6 +219,7 @@ input[type="date"] {
   border: 1px solid rgba(123, 55, 23, 0.12);
   border-radius: 18px;
   background: var(--panel-strong);
+  contain: content;
 }
 
 .map-chip strong {
@@ -281,6 +270,8 @@ input[type="date"] {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: rgba(255, 252, 248, 0.76);
+  content-visibility: auto;
+  contain-intrinsic-size: 120px;
 }
 
 .forecast-item.is-selected,
@@ -313,7 +304,21 @@ input[type="date"] {
   line-height: 1.7;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 @media (max-width: 860px) {
+  :root {
+    --shadow: 0 6px 16px rgba(81, 44, 13, 0.08);
+  }
+
   .shell {
     width: min(100% - 20px, 1120px);
     padding-top: 28px;
