@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S9 胜者为王地图轮换查询器</title>
+  <meta
+    name="description"
+    content="根据 6 天轮换规则，查询 S9 胜者为王任意日期对应的地图安排。"
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">S9 Winner Rotation</p>
+      <h1>S9 胜者为王地图轮换查询器</h1>
+      <p class="hero-copy">
+        按照 2026 年 4 月 16 日开始的 6 天轮换规则，输入任意日期即可查看当天地图，
+        同时预览后续轮换安排。
+      </p>
+    </section>
+
+    <section class="panel control-panel">
+      <div class="control-head">
+        <div>
+          <p class="panel-kicker">日期查询</p>
+          <h2>选择你要查的日期</h2>
+        </div>
+        <div class="quick-actions">
+          <button id="todayBtn" type="button">今天</button>
+          <button id="prevBtn" type="button">前一天</button>
+          <button id="nextBtn" type="button">后一天</button>
+        </div>
+      </div>
+
+      <div class="date-row">
+        <label class="input-wrap" for="dateInput">
+          <span>查询日期</span>
+          <input id="dateInput" type="date">
+        </label>
+        <button id="shareBtn" type="button" class="accent-btn">复制查询链接</button>
+      </div>
+    </section>
+
+    <section class="result-grid">
+      <article class="panel highlight-card">
+        <p class="panel-kicker">当日结果</p>
+        <div class="result-topline">
+          <h2 id="resultDate">-</h2>
+          <span id="cycleBadge" class="cycle-badge">第 - 天</span>
+        </div>
+        <p id="resultHint" class="result-hint">-</p>
+        <div id="mapList" class="map-list" aria-live="polite"></div>
+      </article>
+
+      <article class="panel info-card">
+        <p class="panel-kicker">轮换规则</p>
+        <h2>6 天一轮，永久循环</h2>
+        <p class="info-copy">
+          以 <strong>2026-04-16</strong> 作为第 1 天起点，之后每 6 天重复一次。
+          所以只要知道某一天对应第几天，就能反推出任意未来日期的地图。
+        </p>
+        <div class="legend">
+          <div><span class="legend-label">基准日</span><strong>2026-04-16</strong></div>
+          <div><span class="legend-label">轮换长度</span><strong>6 天</strong></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel forecast-panel">
+      <div class="forecast-head">
+        <div>
+          <p class="panel-kicker">后续预览</p>
+          <h2>接下来 6 天的地图安排</h2>
+        </div>
+        <p class="forecast-copy">以当前查询日期为起点，连续展示一个完整轮次。</p>
+      </div>
+      <div id="forecastList" class="forecast-list"></div>
+    </section>
+
+    <section class="panel cycle-panel">
+      <p class="panel-kicker">完整轮次</p>
+      <h2>固定 6 天地图表</h2>
+      <div id="cycleTable" class="cycle-table"></div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
