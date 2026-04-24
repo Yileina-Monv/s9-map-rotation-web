@@ -37,11 +37,11 @@ body {
 .shell {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 48px 0 72px;
+  padding: 40px 0 64px;
 }
 
 .hero {
-  padding: 20px 4px 28px;
+  padding: 14px 4px 20px;
 }
 
 .eyebrow,
@@ -93,16 +93,22 @@ body {
 }
 
 .control-panel,
-.forecast-panel,
-.cycle-panel {
+.forecast-panel {
   padding: 28px;
+}
+
+.control-panel {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 22px 24px;
 }
 
 .result-grid {
   display: grid;
   grid-template-columns: 1.3fr 0.9fr;
   gap: 18px;
-  margin-top: 18px;
+  margin-top: 22px;
+  align-items: start;
 }
 
 .highlight-card,
@@ -113,11 +119,23 @@ body {
 .highlight-card {
   background:
     linear-gradient(135deg, rgba(255, 250, 243, 0.96), rgba(246, 223, 187, 0.92));
+  border-color: rgba(183, 72, 27, 0.28);
+  box-shadow: 0 18px 38px rgba(129, 55, 17, 0.16);
+  position: relative;
+  overflow: hidden;
 }
 
 .info-card {
   background:
     linear-gradient(180deg, rgba(255, 251, 246, 0.95), rgba(248, 239, 228, 0.88));
+}
+
+.highlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  background: linear-gradient(180deg, #d86b2c, #8f3214);
 }
 
 .control-head,
@@ -222,6 +240,12 @@ input[type="date"] {
   contain: content;
 }
 
+.highlight-card .map-chip {
+  border-color: rgba(183, 72, 27, 0.26);
+  background: linear-gradient(180deg, rgba(255, 252, 248, 0.96), rgba(252, 232, 204, 0.95));
+  box-shadow: 0 8px 18px rgba(125, 54, 19, 0.08);
+}
+
 .map-chip strong {
   display: block;
   font-size: 1.05rem;
@@ -251,19 +275,16 @@ input[type="date"] {
   font-weight: 700;
 }
 
-.forecast-panel,
-.cycle-panel {
+.forecast-panel {
   margin-top: 18px;
 }
 
-.forecast-list,
-.cycle-table {
+.forecast-list {
   flex-direction: column;
   margin-top: 22px;
 }
 
-.forecast-item,
-.cycle-item {
+.forecast-item {
   display: grid;
   gap: 10px;
   padding: 18px 20px;
@@ -274,27 +295,23 @@ input[type="date"] {
   contain-intrinsic-size: 120px;
 }
 
-.forecast-item.is-selected,
-.cycle-item.is-active {
+.forecast-item.is-selected {
   border-color: rgba(183, 72, 27, 0.44);
   background: linear-gradient(135deg, rgba(255, 242, 225, 0.95), rgba(247, 226, 190, 0.9));
 }
 
-.forecast-title,
-.cycle-title {
+.forecast-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
 }
 
-.forecast-title strong,
-.cycle-title strong {
+.forecast-title strong {
   font-size: 1.02rem;
 }
 
-.forecast-meta,
-.cycle-meta {
+.forecast-meta {
   color: var(--muted);
   font-size: 0.9rem;
 }
@@ -334,8 +351,7 @@ input[type="date"] {
   .forecast-head,
   .result-topline,
   .legend,
-  .forecast-title,
-  .cycle-title {
+  .forecast-title {
     align-items: flex-start;
     flex-direction: column;
   }
