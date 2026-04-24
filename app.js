@@ -22,7 +22,6 @@ const elements = {
   resultHint: document.querySelector("#resultHint"),
   mapList: document.querySelector("#mapList"),
   forecastList: document.querySelector("#forecastList"),
-  cycleTable: document.querySelector("#cycleTable"),
 };
 
 function parseDateString(value) {
@@ -106,21 +105,6 @@ function renderForecast(dateValue) {
   elements.forecastList.innerHTML = items.join("");
 }
 
-function renderCycleTable(activeIndex) {
-  elements.cycleTable.innerHTML = ROTATION.map((maps, index) => {
-    const cycleDate = addDays(parseDateString(BASE_DATE), index);
-    return `
-      <article class="cycle-item ${index === activeIndex ? "is-active" : ""}">
-        <div class="cycle-title">
-          <strong>第 ${index + 1} 天</strong>
-          <span class="cycle-meta">${formatDateLabel(cycleDate)}</span>
-        </div>
-        <div class="map-inline">${maps.join(" / ")}</div>
-      </article>
-    `;
-  }).join("");
-}
-
 function updateQueryString(dateValue) {
   const url = new URL(window.location.href);
   url.searchParams.set("date", dateValue);
@@ -138,7 +122,6 @@ function render(dateValue) {
 
   renderMapList(rotation.maps);
   renderForecast(dateValue);
-  renderCycleTable(rotation.index);
   updateQueryString(dateValue);
 }
 
